@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "367287713354",
+    "project_id": "daytracker-534f1",
+    "storage_bucket": "daytracker-534f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367287713354:android:af9c6142d0e2ddecd0b0b3",
+        "android_client_info": {
+          "package_name": "com.example.flutter_day_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367287713354-asuh7eqeg8gtgtdcqc1v9fl9r7cf1473.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSph9LKerIb5P3gBHEiAEa4DQGVD3P6CE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367287713354-asuh7eqeg8gtgtdcqc1v9fl9r7cf1473.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
