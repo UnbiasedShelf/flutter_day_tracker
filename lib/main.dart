@@ -2,6 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'data/Business.dart';
+import 'data/BusinessType.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -58,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // Once complete, show your application
             if (snapshot.connectionState == ConnectionState.done) {
-              return Text("Home");
+              return Text(Business(DateTime.now(), BusinessType.STUDYING).toString());
             }
 
             // Otherwise, show something whilst waiting for initialization to complete
