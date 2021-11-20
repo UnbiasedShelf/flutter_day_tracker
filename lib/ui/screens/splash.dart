@@ -9,7 +9,7 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _initialization.then((_) => Navigator.pushNamed(context, "/home"));
+    _initialization.then((_) => Navigator.pushReplacementNamed(context, "/home"));
 
     return Scaffold(
         backgroundColor: Colors.lightGreen,
