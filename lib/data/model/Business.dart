@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_day_tracker/data/BusinessType.dart';
+import 'package:flutter_day_tracker/data/model/BusinessType.dart';
 
 class Business {
   int? id;

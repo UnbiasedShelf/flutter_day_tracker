@@ -6,11 +6,11 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_day_tracker/data/Business.dart';
-import 'package:flutter_day_tracker/data/BusinessType.dart';
+import 'package:flutter_day_tracker/data/model/Business.dart';
+import 'package:flutter_day_tracker/data/model/BusinessType.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_day_tracker/main.dart';
+import 'package:flutter_day_tracker/ui/screens/home.dart';
 
 void main() {
   Business business = Business(
