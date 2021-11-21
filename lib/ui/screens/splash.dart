@@ -1,15 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_day_tracker/data/firebase/FirebaseRepository.dart';
 
 class Splash extends StatelessWidget {
   Splash({Key? key}) : super(key: key);
 
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-
   @override
   Widget build(BuildContext context) {
-    _initialization.then((_) => Navigator.pushReplacementNamed(context, "/home"));
+    FirebaseRepository.instance
+        .init()
+        .then((_) => Navigator.pushReplacementNamed(context, "/home"));
 
     return Scaffold(
         backgroundColor: Colors.lightGreen,
