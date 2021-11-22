@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_day_tracker/ui/screens/main.dart';
 import 'package:flutter_day_tracker/ui/screens/splash.dart';
 
 import 'screens/home.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => Splash(),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        '/home': (context) => HomePage(),
+        '/home': (context) => MainNavigationStatefulWidget(),
       },
     );
   }

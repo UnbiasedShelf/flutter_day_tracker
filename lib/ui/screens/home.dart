@@ -22,14 +22,6 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            OutlinedButton(
-                onPressed: () =>
-                    signOutOfGoogle().then((value) => print(auth.currentUser)),
-                child: Text("Sign out")),
-            OutlinedButton(
-                onPressed: () =>
-                    signInWithGoogle().then((value) => print(auth.currentUser)),
-                child: Text("Sign in")),
             AddBusiness(),
             GetBusiness(),
           ],
