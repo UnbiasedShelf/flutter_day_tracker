@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_day_tracker/data/auth/google.dart';
 import 'package:flutter_day_tracker/data/firebase/FirebaseRepository.dart';
+import 'package:flutter_day_tracker/ui/widgets/BusinessItem.dart';
 
 import '../../data/model/Business.dart';
 import '../../data/model/BusinessType.dart';
@@ -16,17 +17,13 @@ class HomePage extends StatelessWidget {
         title: Text("Home"),
       ),
       body: Center(
-        child: Column(
-          children: [
-            AddBusiness(),
-            GetBusiness(),
-          ],
-        ),
+        child: BusinessList(),
       ),
     );
   }
 }
 
+//todo validation
 class AddBusiness extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -41,7 +38,7 @@ class AddBusiness extends StatelessWidget {
   }
 }
 
-class GetBusiness extends StatelessWidget {
+class BusinessList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -53,8 +50,8 @@ class GetBusiness extends StatelessWidget {
               itemBuilder: (context, index) {
                 Business item = Business.fromJson(
                     snapshot.data!.docs[index].data() as Map<String, Object?>);
-                print(item);
-                return Text(item.toString());
+                print(item.toString());
+                return BusinessItem(business: item, onClick: () { print(item.toString()); });
               },
               scrollDirection: Axis.vertical,
               shrinkWrap: true,

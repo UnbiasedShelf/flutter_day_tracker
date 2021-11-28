@@ -15,8 +15,6 @@ class MainNavigationStatefulWidget extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _MainNavigationStatefulWidgetState extends State<MainNavigationStatefulWidget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     StatsPage(),
@@ -43,7 +41,7 @@ class _MainNavigationStatefulWidgetState extends State<MainNavigationStatefulWid
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.show_chart),
-            label: 'Stats',
+            label: 'Statistics',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_rounded),

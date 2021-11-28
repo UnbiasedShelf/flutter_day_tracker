@@ -1,10 +1,13 @@
 enum BusinessType {
   CHILL,
-  WORK,
-  STUDYING,
-  ROAD,
+  CLEANING,
+  COOKING,
   LUNCH,
-  SLEEP
+  ROAD,
+  SLEEP,
+  STUDY,
+  WORK,
+  WORKOUT
 }
 
 extension EnumTransform on List {
