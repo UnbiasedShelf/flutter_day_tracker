@@ -14,7 +14,6 @@ import 'package:flutter_day_tracker/ui/screens/home.dart';
 
 void main() {
   Business business = Business(
-    id: null,
     start: DateTime.now(),
     end: null,
     type: BusinessType.LUNCH

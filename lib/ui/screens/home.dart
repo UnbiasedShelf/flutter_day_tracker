@@ -11,10 +11,6 @@ import '../../data/model/BusinessType.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // signInWithGoogle().then((value) => print(value));
-
-    FirebaseAuth auth = FirebaseAuth.instance;
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
