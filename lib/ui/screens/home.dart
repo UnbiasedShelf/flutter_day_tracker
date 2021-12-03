@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_day_tracker/data/auth/google.dart';
 import 'package:flutter_day_tracker/data/firebase/FirebaseRepository.dart';
 import 'package:flutter_day_tracker/ui/widgets/BusinessItem.dart';
 

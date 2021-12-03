@@ -1,11 +1,3 @@
-/// Flutter code sample for AnimatedPositioned
-
-// The following example transitions an AnimatedPositioned
-// between two states. It adjusts the `height`, `width`, and
-// [Positioned] properties when tapped.
-
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class StatsPage extends StatefulWidget {
@@ -15,7 +7,6 @@ class StatsPage extends StatefulWidget {
   State<StatsPage> createState() => _StatsPageState();
 }
 
-/// This is the private State class that goes with MyStatefulWidget.
 class _StatsPageState extends State<StatsPage> {
   List<bool> selected = List<bool>.empty(growable: true);
 

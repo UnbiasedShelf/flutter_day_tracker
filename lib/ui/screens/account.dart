@@ -12,7 +12,7 @@ class AccountPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text("Account"),
       ),
       body: Center(
         child: Column(

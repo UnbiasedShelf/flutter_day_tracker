@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_day_tracker/ui/screens/stats.dart';
+import 'package:flutter_day_tracker/ui/widgets/BottomBar.dart';
 
 import 'account.dart';
 import 'home.dart';
@@ -17,7 +18,7 @@ class _MainNavigationStatefulWidgetState extends State<MainNavigationStatefulWid
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    StatsPage(),
+    // StatsPage(),
     AccountPage()
   ];
 
@@ -33,24 +34,33 @@ class _MainNavigationStatefulWidgetState extends State<MainNavigationStatefulWid
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+      bottomNavigationBar: FABBottomAppBar(
+        items: <FABBottomAppBarItem>[
+          FABBottomAppBarItem(
+            iconData: Icons.home,
+            text: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.show_chart),
-            label: 'Statistics',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
-            label: 'Account',
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.show_chart),
+          //   label: 'Statistics',
+          // ),
+          FABBottomAppBarItem(
+            iconData: Icons.account_circle_rounded,
+            text: 'Account',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+        selectedColor: Colors.amber[800]!,
+        onTabSelected: _onItemTapped,
+        notchedShape: CircularNotchedRectangle(),
+        centerItemText: "Add",
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Add",
+        backgroundColor: Colors.amber[800],
+        onPressed: () { Navigator.pushNamed(context, "/details"); },
+        child: const Icon(Icons.add),
+        elevation: 2.0,
       ),
     );
   }

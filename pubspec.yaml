@@ -38,7 +38,10 @@ dependencies:
   google_sign_in: ^5.2.1
   sign_in_with_apple: ^3.2.0
   crypto: ^3.0.1
+
+  # DateTime
   intl: ^0.17.0
+  date_time_picker: ^2.1.0
 
 dev_dependencies:
   flutter_test:
