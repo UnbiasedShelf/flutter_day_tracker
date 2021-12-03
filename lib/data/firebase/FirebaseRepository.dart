@@ -33,8 +33,8 @@ class FirebaseRepository {
   }
 
   Stream<QuerySnapshot<Object?>> getBusinessStream() {
-    CollectionReference businesses =
-        _firestore.collection(_auth.currentUser!.uid);
+    Query businesses =
+        _firestore.collection(_auth.currentUser!.uid).orderBy("start", descending: true);
     return businesses.snapshots();
   }
 }
