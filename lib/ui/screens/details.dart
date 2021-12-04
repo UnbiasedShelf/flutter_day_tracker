@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_day_tracker/data/firebase/FirebaseRepository.dart';
 import 'package:flutter_day_tracker/data/model/Business.dart';
 import 'package:flutter_day_tracker/data/model/BusinessType.dart';
+import 'package:flutter_day_tracker/ui/widgets/BusinessDateTimePicker.dart';
 import 'package:flutter_day_tracker/ui/widgets/BusinessTypeCard.dart';
 import 'package:flutter_day_tracker/ui/widgets/NamedDivider.dart';
 
@@ -15,6 +16,8 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   int selectedIndex = 0;
   final TextEditingController _controller = TextEditingController();
+  final TextEditingController _startController = TextEditingController();
+  final TextEditingController _endController = TextEditingController();
 
   @override
   void initState() {
@@ -32,6 +35,7 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
       body: Center(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
               padding: EdgeInsets.all(5),
@@ -70,6 +74,7 @@ class _DetailsPageState extends State<DetailsPage> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size.fromHeight(40),
+                  primary: Colors.amber[800]
                 ),
                 onPressed: () {
                   var selectedType = BusinessType.values[selectedIndex];
@@ -78,14 +83,35 @@ class _DetailsPageState extends State<DetailsPage> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  "Start",
-                  style: TextStyle(fontSize: 24),
+                  "SET NOW AS BEGIN",
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: NamedDivider(name: 'or')
+            ),
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Text(
+                    "Setup time range manually:",
+                  style: TextStyle(fontSize: 20),
+                )
+            ),
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: BusinessDateTimePicker(
+                  label: "Start",
+                  controller: _startController,
+                )
+            ),
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: BusinessDateTimePicker(
+                  label: "End",
+                  controller: _endController,
+                )
             ),
           ],
         ),

@@ -34,7 +34,7 @@ class BusinessTypeCard extends StatelessWidget {
             color: isSelected ? Colors.amber[800] : Colors.white,
             borderRadius: BorderRadius.circular(5.0),
           ),
-          duration: Duration(milliseconds: 100),
+          duration: Duration(milliseconds: 200),
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5.0),

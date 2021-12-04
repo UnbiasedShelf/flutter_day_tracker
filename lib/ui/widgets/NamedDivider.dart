@@ -25,7 +25,7 @@ class NamedDivider extends StatelessWidget {
         Text(
           name,
           style: TextStyle(
-            fontSize: 16
+            fontSize: 20
           ),
         ),
         Expanded(
