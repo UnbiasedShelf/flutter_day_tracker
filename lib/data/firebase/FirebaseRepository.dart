@@ -32,9 +32,17 @@ class FirebaseRepository {
     return businesses.add(business.toJson());
   }
 
+  Future<void> updateBusiness(String id, Business business) {
+    return _firestore.collection(_auth.currentUser!.uid).doc(id).update(business.toJson());
+  }
+
   Stream<QuerySnapshot<Object?>> getBusinessStream() {
     Query businesses =
         _firestore.collection(_auth.currentUser!.uid).orderBy("start", descending: true);
     return businesses.snapshots();
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getBusinessById(String id) {
+    return _firestore.collection(_auth.currentUser!.uid).doc(id).get();
   }
 }

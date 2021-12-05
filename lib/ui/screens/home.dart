@@ -15,9 +15,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Home"),
       ),
-      body: Center(
-        child: BusinessList(),
-      ),
+      body: BusinessList(),
     );
   }
 }
@@ -47,16 +45,17 @@ class BusinessList extends StatelessWidget {
             return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                Business item = Business.fromJson(
-                    snapshot.data!.docs[index].data() as Map<String, Object?>);
-                print(item.toString());
-                return BusinessItem(business: item, onClick: () { print(item.toString()); });
+                var doc = snapshot.data!.docs[index];
+                Business item = Business.fromJson(doc.data() as Map<String, Object?>);
+                return BusinessItem(business: item, onClick: () {
+                  Navigator.pushNamed(context, "details", arguments: doc.id);
+                });
               },
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
             );
           } else {
-            return Text("loading");
+            return Center();
           }
         });
   }

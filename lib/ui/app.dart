@@ -9,7 +9,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,6 +17,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.lightGreen,
       ),
       initialRoute: '/',
+      onGenerateRoute: (settings) {
+        if (settings.name == "details") {
+          return MaterialPageRoute(
+              builder: (_) => DetailsPage(argument: settings.arguments.toString())
+          );
+        }
+      },
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => Splash(),

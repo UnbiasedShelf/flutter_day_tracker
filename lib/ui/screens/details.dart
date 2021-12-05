@@ -6,29 +6,45 @@ import 'package:flutter_day_tracker/data/util/util.dart';
 import 'package:flutter_day_tracker/ui/widgets/BusinessDateTimePicker.dart';
 import 'package:flutter_day_tracker/ui/widgets/BusinessTypeCard.dart';
 import 'package:flutter_day_tracker/ui/widgets/NamedDivider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({Key? key}) : super(key: key);
+  final String? argument;
+
+  const DetailsPage({Key? key, this.argument}) : super(key: key);
 
   @override
-  State<DetailsPage> createState() => _DetailsPageState();
+  State<DetailsPage> createState() => _DetailsPageState(argument);
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  int selectedIndex = 0;
+  final String? docId;
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _startController = TextEditingController();
   final TextEditingController _endController = TextEditingController();
   Business business =
       Business(start: DateTime.now(), end: null, type: BusinessType.values[0]);
 
+  _DetailsPageState(this.docId) : super();
+
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _controller.text = _getValueByIndex(selectedIndex);
-      _startController.text = formatDate(business.start);
-    });
+    if (docId != null) {
+      FirebaseRepository.instance.getBusinessById(docId!).then((value) =>
+          setState(() {
+            business = Business.fromJson(value.data() as Map<String, Object?>);
+            _controller.text = _getValueByIndex(business.type.index);
+            _startController.text = formatDate(business.start);
+            business.end != null ? _endController.text = formatDate(business.end) : null;
+          })
+      );
+    } else {
+      setState(() {
+        _controller.text = _getValueByIndex(business.type.index);
+        _startController.text = formatDate(business.start);
+      });
+    }
   }
 
   @override
@@ -52,11 +68,11 @@ class _DetailsPageState extends State<DetailsPage> {
                   children: List.generate(BusinessType.values.length, (index) {
                     return BusinessTypeCard(
                       index: index,
-                      isSelected: index == selectedIndex,
+                      isSelected: index == business.type.index,
                       onClick: () {
                         setState(() {
-                          selectedIndex = index;
-                          _controller.text = _getValueByIndex(selectedIndex);
+                          business.type = BusinessType.values[index];
+                          _controller.text = _getValueByIndex(business.type.index);
                         });
                       },
                     );
@@ -81,14 +97,16 @@ class _DetailsPageState extends State<DetailsPage> {
                       minimumSize: Size.fromHeight(40),
                       primary: Colors.amber[800]),
                   onPressed: () {
-                    var selectedType = BusinessType.values[selectedIndex];
-                    business.type = selectedType;
-                    business.start = DateTime.now();
-                    business.end = null;
+                    if (docId == null) {
+                      business.start = DateTime.now();
+                      business.end = null;
+                    } else {
+                      business.end = DateTime.now();
+                    }
                     _save();
                   },
                   child: Text(
-                    "SAVE WITH NOW AS BEGIN",
+                    docId == null ? "SAVE WITH NOW AS BEGIN" : "SAVE WITH NOW AS END",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -136,14 +154,17 @@ class _DetailsPageState extends State<DetailsPage> {
                       minimumSize: Size.fromHeight(40),
                       primary: Colors.amber[800]),
                   onPressed: () {
-                    var selectedType = BusinessType.values[selectedIndex];
-                    business.type = selectedType;
-                    if(_validate(business)) _save();
-                    else ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Invalid range"),
-                        )
-                    );
+                    if (_validate(business))
+                      _save();
+                    else
+                      Fluttertoast.showToast(
+                          msg: "Invalid Range",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.black12,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
                   },
                   child: Text(
                     "SAVE",
@@ -175,17 +196,30 @@ class _DetailsPageState extends State<DetailsPage> {
 
   bool _validate(Business business) {
     DateTime now = DateTime.now();
-    print(business.end?.add(Duration(minutes: 1)).difference(business.start));
-    print(business.end?.add(Duration(minutes: 1)).difference(business.start).isNegative);
-    print(business.end?.difference(now));
-    print(business.end?.difference(now).isNegative);
-    bool result = !(business.end?.add(Duration(minutes: 1)).difference(business.start).isNegative ?? false)
-        && (business.end?.difference(now).isNegative ?? true);
-   return result;
+    bool result = !(business.end
+                ?.add(Duration(minutes: 1))
+                .difference(business.start)
+                .isNegative ??
+            false) &&
+        (business.end?.difference(now).isNegative ?? true);
+    return result;
   }
 
   void _save() {
-    FirebaseRepository.instance.addBusiness(business);
+    if (docId == null) {
+      FirebaseRepository.instance.addBusiness(business);
+    } else {
+      FirebaseRepository.instance.updateBusiness(docId!, business);
+    }
+
+    Fluttertoast.showToast(
+        msg: "Item saved successfully",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black12,
+        textColor: Colors.white,
+        fontSize: 16.0);
     Navigator.pop(context);
   }
 }
