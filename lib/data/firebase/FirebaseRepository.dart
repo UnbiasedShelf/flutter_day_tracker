@@ -35,6 +35,9 @@ class FirebaseRepository {
   Future<void> updateBusiness(String id, Business business) {
     return _firestore.collection(_auth.currentUser!.uid).doc(id).update(business.toJson());
   }
+  Future<void> delete(String id) {
+    return _firestore.collection(_auth.currentUser!.uid).doc(id).delete();
+  }
 
   Stream<QuerySnapshot<Object?>> getBusinessStream() {
     Query businesses =

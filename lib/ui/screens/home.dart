@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_day_tracker/data/firebase/FirebaseRepository.dart';
 import 'package:flutter_day_tracker/ui/widgets/BusinessItem.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../data/model/Business.dart';
 import '../../data/model/BusinessType.dart';
@@ -25,8 +26,10 @@ class AddBusiness extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> addBusiness() {
-      var business = Business(start: DateTime.now(), end: null, type: BusinessType.LUNCH);
-      return FirebaseRepository.instance.addBusiness(business)
+      var business =
+          Business(start: DateTime.now(), end: null, type: BusinessType.LUNCH);
+      return FirebaseRepository.instance
+          .addBusiness(business)
           .then((value) => print("Business Added"))
           .catchError((error) => print("Failed to add business: $error"));
     }
@@ -46,10 +49,30 @@ class BusinessList extends StatelessWidget {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 var doc = snapshot.data!.docs[index];
-                Business item = Business.fromJson(doc.data() as Map<String, Object?>);
-                return BusinessItem(business: item, onClick: () {
-                  Navigator.pushNamed(context, "details", arguments: doc.id);
-                });
+                Business item =
+                    Business.fromJson(doc.data() as Map<String, Object?>);
+                return Dismissible(
+                  key: ObjectKey(doc.id),
+                  child: BusinessItem(
+                      business: item,
+                      onClick: () {
+                        Navigator.pushNamed(context, "details",
+                            arguments: doc.id);
+                      }),
+                  onDismissed: (direction) {
+                    FirebaseRepository.instance.delete(doc.id).then((value) => {
+                          Fluttertoast.showToast(
+                              msg: "Item deleted",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.black12,
+                              textColor: Colors.white,
+                              fontSize: 16.0)
+                        });
+                  },
+                  direction: DismissDirection.endToStart,
+                );
               },
               scrollDirection: Axis.vertical,
               shrinkWrap: true,

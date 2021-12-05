@@ -207,11 +207,16 @@ class _DetailsPageState extends State<DetailsPage> {
 
   void _save() {
     if (docId == null) {
-      FirebaseRepository.instance.addBusiness(business);
+      FirebaseRepository.instance.addBusiness(business).then((value) => _showToastSaved());
     } else {
-      FirebaseRepository.instance.updateBusiness(docId!, business);
+      FirebaseRepository.instance.updateBusiness(docId!, business).then((value) => _showToastSaved());
     }
 
+
+    Navigator.pop(context);
+  }
+
+  void _showToastSaved() {
     Fluttertoast.showToast(
         msg: "Item saved successfully",
         toastLength: Toast.LENGTH_SHORT,
@@ -220,6 +225,5 @@ class _DetailsPageState extends State<DetailsPage> {
         backgroundColor: Colors.black12,
         textColor: Colors.white,
         fontSize: 16.0);
-    Navigator.pop(context);
   }
 }
