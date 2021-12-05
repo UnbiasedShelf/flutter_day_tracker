@@ -18,6 +18,10 @@ class FirebaseRepository {
     _auth = FirebaseAuth.instance;
   }
 
+  Stream<User?> getUserStream() {
+    return _auth.authStateChanges();
+  }
+
   Future<UserCredential> signIn() {
     return signInWithGoogle();
   }

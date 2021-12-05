@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_day_tracker/ui/screens/details.dart';
 import 'package:flutter_day_tracker/ui/screens/main.dart';
 import 'package:flutter_day_tracker/ui/screens/splash.dart';
+import 'package:flutter_day_tracker/ui/screens/stats.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/home': (context) => MainNavigationStatefulWidget(),
         '/details': (context) => DetailsPage(),
+        '/stats': (context) => StatsPage(),
       },
     );
   }
