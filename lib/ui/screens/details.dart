@@ -186,12 +186,8 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 
   String _getValueByIndex(int index) {
-    var result = BusinessType.values
-            .string<BusinessType>(BusinessType.values[index])
-            ?.toLowerCase() ??
-        "";
-    result = result.substring(0, 1).toUpperCase() + result.substring(1);
-    return result;
+    var type = BusinessType.values[index];
+    return formatType(type);
   }
 
   bool _validate(Business business) {

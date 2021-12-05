@@ -1,3 +1,4 @@
+import 'package:flutter_day_tracker/data/model/BusinessType.dart';
 import 'package:intl/intl.dart';
 
 final DateFormat dateFormat = DateFormat('HH:mm dd.MM.yyyy');
@@ -22,4 +23,13 @@ String formatDate(DateTime? date) {
   } else {
     return dateFormat.format(date);
   }
+}
+
+String formatType(BusinessType type) {
+  var result = BusinessType.values
+      .string<BusinessType>(type)
+      ?.toLowerCase() ??
+      "";
+  result = result.substring(0, 1).toUpperCase() + result.substring(1);
+  return result;
 }
