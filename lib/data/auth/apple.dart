@@ -50,4 +50,6 @@ Future<UserCredential> signInWithApple() async {
   return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
 }
 
-//todo signout
+Future<void> signOutOfApple() async {
+  await FirebaseAuth.instance.signOut();
+}

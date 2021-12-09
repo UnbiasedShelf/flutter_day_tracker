@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter_day_tracker">
    <application
-        android:label="flutter_day_tracker"
+        android:label="Day Tracker"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

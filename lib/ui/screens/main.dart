@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_day_tracker/ui/screens/stats.dart';
 import 'package:flutter_day_tracker/ui/widgets/BottomBar.dart';
-
 import 'account.dart';
 import 'home.dart';
 

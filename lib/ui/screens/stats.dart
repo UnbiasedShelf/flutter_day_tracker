@@ -43,6 +43,17 @@ class StatsPage extends StatelessWidget {
                     showChartValuesOutside: false,
                     decimalPlaces: 1,
                   ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  child: Text(
+                    buildRecommendationsFromDataMap(typeToTotalTime),
+                    style: TextStyle(
+                        fontSize: 18,
+                      fontWeight: FontWeight.w500
+                    ),
+                    maxLines: 1000,
+                  ),
                 )
               ],
             );
